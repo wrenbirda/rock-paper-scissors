@@ -12,35 +12,40 @@ let out = ['rock', 'paper', 'scissors'];
 
 // now's the scary part. We're going to FIGHT!
 function play() {
-    if (getPlayerChoice.toLowerCase() == 'rock') {
-      if (items[getComputerChoice] == 'Paper') {
-        out= ('You lose! Paper beats rock. Go again.');
-      } else if (items[getComputerChoice] == 'Scissors') {
-        out= ('You win! Rock beats scissors. Go again.');
-      } else if (items[getComputerChoice] == 'Rock') {
-        out= ('You tie! Go again.');
-      }
-    } else if (getPlayerChoice.toLowerCase() == 'paper') {
-      if (items[getComputerChoice] == 'Paper') {
-        out= ('You tie! Go again.');
-      } else if (items[getComputerChoice] == 'Scissors') {
-        out= ('You lose! Scissors beats paper. Go again.');
-      } else if (items[getComputerChoice] == 'Rock') {
-        out= ('You win! Paper beats rock. Go again.');
-      }
-    } else if (getPlayerChoice.toLowerCase() == 'scissors') {
-      if (items[getComputerChoice] == 'Paper') {
-        out= ('You win! Scissors beats paper. Go again.');
-      } else if (items[getComputerChoice] == 'Scissors') {
-        out= ('You tie! Go again.');
-      } else if (items[getComputerChoice] == 'Rock') {
-        out= ('You lose! Rock beats scissors. Go again.');
-      }
-    } else {
-      console.log('Please choose only rock, paper, or scissors!');
+// if player chose rock
+  if (getPlayerChoice.toLowerCase() == 'rock') {
+    if (items[getComputerChoice] == 'Paper') {
+      out= ('You lose! Paper beats rock. Go again.');
+    } else if (items[getComputerChoice] == 'Scissors') {
+      out= ('You win! Rock beats scissors. Go again.');
+    } else if (items[getComputerChoice] == 'Rock') {
+      out= ('You tie! Go again.');
     }
+// if player chose paper
+  } else if (getPlayerChoice.toLowerCase() == 'paper') {
+    if (items[getComputerChoice] == 'Paper') {
+      out= ('You tie! Go again.');
+    } else if (items[getComputerChoice] == 'Scissors') {
+      out= ('You lose! Scissors beats paper. Go again.');
+    } else if (items[getComputerChoice] == 'Rock') {
+      out= ('You win! Paper beats rock. Go again.');
+    }
+// if player chose scissors
+  } else if (getPlayerChoice.toLowerCase() == 'scissors') {
+    if (items[getComputerChoice] == 'Paper') {
+      out= ('You win! Scissors beats paper. Go again.');
+    } else if (items[getComputerChoice] == 'Scissors') {
+      out= ('You tie! Go again.');
+    } else if (items[getComputerChoice] == 'Rock') {
+      out= ('You lose! Rock beats scissors. Go again.');
+    }
+// if player didn't choose RPS
+  } else {
+    console.log('Please choose only rock, paper, or scissors!');
   }
+}
 
+// runs the function and gives us the result
 play()
 console.log(out)
 
