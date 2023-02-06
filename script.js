@@ -1,50 +1,46 @@
-// We are going to add string values to these numbers. 0 will equal rock, 1 will be paper, and 2 scissors.
+// define what 0, 1, and 2 are. 0 will equal rock, 1 will be paper, and 2 scissors
 const items = ['Rock', 'Paper', 'Scissors'];
 
-// Then we need to ask the computer to choose one of these items. RPS are tied to 012.
+// ask the computer to choose one of these items
 const getComputerChoice = Math.floor(Math.random() * items.length);
 
-// console.log so I can check it's working.
-// console.log(items[getComputerChoice]);
-
 // we need to include a player selection too
-const getPlayerChoice = prompt('Let\'s play rock, paper, scissors! Please type your selection below:');
+let getPlayerChoice = prompt('Let\'s play rock, paper, scissors! Please type your selection below:');
 
-// console.log so I can check it's working.
-// console.log(getPlayerChoice);
+// define 'out'
+let out = ['rock', 'paper', 'scissors'];
 
-// Now's the scary part. We're going to FIGHT!
+// now's the scary part. We're going to FIGHT!
 function play() {
-  if (getPlayerChoice == 'r') {
-    if (getComputerChoice == 'Paper') {
-      print= ('You lose! Paper beats rock. Go again.');
-    } else if (getComputerChoice == 'Scissors') {
-      print= ('You win! Rock beats scissors. Go again.');
-    } else if (getComputerChoice == 'Rock') {
-      print= ('You tie! Go again.');
+    if (getPlayerChoice.toLowerCase() == 'rock') {
+      if (items[getComputerChoice] == 'Paper') {
+        out= ('You lose! Paper beats rock. Go again.');
+      } else if (items[getComputerChoice] == 'Scissors') {
+        out= ('You win! Rock beats scissors. Go again.');
+      } else if (items[getComputerChoice] == 'Rock') {
+        out= ('You tie! Go again.');
+      }
+    } else if (getPlayerChoice.toLowerCase() == 'paper') {
+      if (items[getComputerChoice] == 'Paper') {
+        out= ('You tie! Go again.');
+      } else if (items[getComputerChoice] == 'Scissors') {
+        out= ('You lose! Scissors beats paper. Go again.');
+      } else if (items[getComputerChoice] == 'Rock') {
+        out= ('You win! Paper beats rock. Go again.');
+      }
+    } else if (getPlayerChoice.toLowerCase() == 'scissors') {
+      if (items[getComputerChoice] == 'Paper') {
+        out= ('You win! Scissors beats paper. Go again.');
+      } else if (items[getComputerChoice] == 'Scissors') {
+        out= ('You tie! Go again.');
+      } else if (items[getComputerChoice] == 'Rock') {
+        out= ('You lose! Rock beats scissors. Go again.');
+      }
+    } else {
+      console.log('Please choose only rock, paper, or scissors!');
     }
-  } else {
-    console.log('test');
   }
-}
 
+play()
+console.log(out)
 
-
-// ignore this shit for now
-// if (getPlayerChoice(rock) && getComputerChoice(paper)) {
-//  console.log('You lose! Paper beats rock.')
-//}
-
-
-
-//function geek() {
-  //var doc = prompt("Please enter some text",
-    //  "GeeksforGeeks");
-//  if (doc != null) {
-  //    document.getElementById("g").innerHTML =
-    //      "Welcome to " + doc;
- // }
-//}
-
-// Your game is going to play against the computer, so begin with a function called getComputerChoice that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’.
-// We’ll use this function in the game to make the computer’s play. Tip: use the console to make sure this is returning the expected output before moving to the next step!
