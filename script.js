@@ -1,9 +1,11 @@
 // ask the computer to choose one of these items
 const items = ["rock", "paper", "scissors"];
 
+let playerWins = 0;
+let playerLoses = 0;
+
 function getComputerChoice() {
-  const random = Math.floor(Math.random() * items.length);
-  return items[random];
+  return items[Math.floor(Math.random() * items.length)];
 }
 
 // we need to include a player selection too
@@ -18,28 +20,31 @@ function capitalize(string) {
 
 function announceWin(winner, loser) {
   console.log("You win!", capitalize(winner), "beats", loser + ". Go again.");
+  playerWins++;
 }
 
 function announceLose(winner, loser) {
   console.log("You lose!", capitalize(winner), "beats", loser + ". Go again.");
+  playerLoses++;
 }
 
-/*
+// should never get here
 function somethingBroke() {
   console.log("How'd you get here?");
 }
-*/
 
 // Now comes the scary part. We're going to FIGHT!
 function play() {
   let pc = getPlayerChoice().toLowerCase();
-  let cc = getComputerChoice().toLowerCase();
+  let cc = getComputerChoice();
 
+  // for development and testing
   console.log(pc)
   console.log(cc)
 
   if (pc == cc) {
     console.log('You tie! Go again.');
+    return;
   }
 
   if (pc == "rock") {
@@ -47,9 +52,9 @@ function play() {
       announceLose(cc, pc);
     } else if (cc == "scissors") {
       announceWin(pc, cc);
-// Don't know how to continue in JS yet
-//    } else {
-//      somethingBroke();
+    } else {
+      somethingBroke();
+      return;
     }
   }
 
@@ -58,6 +63,9 @@ function play() {
       announceLose(cc, pc);
     } else if (cc == "rock") {
       announceWin(pc, cc);
+    } else {
+      somethingBroke();
+      return;
     }
   }
 
@@ -66,6 +74,9 @@ function play() {
       announceLose(cc, pc);
     } else if (cc == "paper") {
       announceWin(pc, cc);
+    } else {
+      somethingBroke();
+      return;
     }
 
   } else {
@@ -73,4 +84,16 @@ function play() {
   }
 }
 
-play()
+// entrypoint
+
+for (i = 0; ; i++) {
+  if (playerWins == 3) {
+    console.log("You won three games!");
+    break;
+  }
+  else if (playerLoses == 3) {
+    console.log("You lost three games!");
+    break;
+  }
+  play();
+}
