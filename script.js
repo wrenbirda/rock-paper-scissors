@@ -1,46 +1,76 @@
-// define what 0, 1, and 2 are. 0 will equal rock, 1 will be paper, and 2 scissors
-const items = ['Rock', 'Paper', 'Scissors'];
-
 // ask the computer to choose one of these items
-const getComputerChoice = Math.floor(Math.random() * items.length);
+const items = ["rock", "paper", "scissors"];
+
+function getComputerChoice() {
+  const random = Math.floor(Math.random() * items.length);
+  return items[random];
+}
 
 // we need to include a player selection too
-let getPlayerChoice = prompt('Let\'s play rock, paper, scissors! Please type your selection below:');
+function getPlayerChoice() {
+  return prompt("Let's play rock, paper, scissors! Please type your selection below:");
+}
 
-// define 'out'
-let out = ['rock', 'paper', 'scissors'];
+// https://stackoverflow.com/a/1026087
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
-// now's the scary part. We're going to FIGHT!
+function announceWin(winner, loser) {
+  console.log("You win!", capitalize(winner), "beats", loser + ". Go again.");
+}
+
+function announceLose(winner, loser) {
+  console.log("You lose!", capitalize(winner), "beats", loser + ". Go again.");
+}
+
+/*
+function somethingBroke() {
+  console.log("How'd you get here?");
+}
+*/
+
+// Now comes the scary part. We're going to FIGHT!
 function play() {
-    if (getPlayerChoice.toLowerCase() == 'rock') {
-      if (items[getComputerChoice] == 'Paper') {
-        out= ('You lose! Paper beats rock. Go again.');
-      } else if (items[getComputerChoice] == 'Scissors') {
-        out= ('You win! Rock beats scissors. Go again.');
-      } else if (items[getComputerChoice] == 'Rock') {
-        out= ('You tie! Go again.');
-      }
-    } else if (getPlayerChoice.toLowerCase() == 'paper') {
-      if (items[getComputerChoice] == 'Paper') {
-        out= ('You tie! Go again.');
-      } else if (items[getComputerChoice] == 'Scissors') {
-        out= ('You lose! Scissors beats paper. Go again.');
-      } else if (items[getComputerChoice] == 'Rock') {
-        out= ('You win! Paper beats rock. Go again.');
-      }
-    } else if (getPlayerChoice.toLowerCase() == 'scissors') {
-      if (items[getComputerChoice] == 'Paper') {
-        out= ('You win! Scissors beats paper. Go again.');
-      } else if (items[getComputerChoice] == 'Scissors') {
-        out= ('You tie! Go again.');
-      } else if (items[getComputerChoice] == 'Rock') {
-        out= ('You lose! Rock beats scissors. Go again.');
-      }
-    } else {
-      console.log('Please choose only rock, paper, or scissors!');
+  let pc = getPlayerChoice().toLowerCase();
+  let cc = getComputerChoice().toLowerCase();
+
+  console.log(pc)
+  console.log(cc)
+
+  if (pc == cc) {
+    console.log('You tie! Go again.');
+  }
+
+  if (pc == "rock") {
+    if (cc == "paper") {
+      announceLose(cc, pc);
+    } else if (cc == "scissors") {
+      announceWin(pc, cc);
+// Don't know how to continue in JS yet
+//    } else {
+//      somethingBroke();
     }
   }
 
-play()
-console.log(out)
+  else if (pc == "paper") {
+    if (cc == "scissors") {
+      announceLose(cc, pc);
+    } else if (cc == "rock") {
+      announceWin(pc, cc);
+    }
+  }
 
+  else if (pc == "scissors") {
+    if (cc == "rock") {
+      announceLose(cc, pc);
+    } else if (cc == "paper") {
+      announceWin(pc, cc);
+    }
+
+  } else {
+    console.log("Please choose only rock, paper, or scissors!");
+  }
+}
+
+play()
