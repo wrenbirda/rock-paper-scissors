@@ -1,0 +1,9 @@
+
+js should have a list function like .items() (although that's more of a dictionary or associate array type name), or .in() where you
+could say
+
+if playerChoice not in yourList:
+    return "invalid"
+
+
+then for the 
