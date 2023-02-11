@@ -1,66 +1,131 @@
-// I'm making a new script. Because I can.
-// Starting over has never hurt anyone. I got confused, I saved the old script, and it's time to start again.
-// Good luck Wren.
-
-// First we need to define the options in our game.
+// define game options
 const items = ['rock', 'paper', 'scissors'];
 
-// Next we need to get a choice from our computer.
+// define counter variables
+let playerWinsCounter = 0;
+let playerLosesCounter = 0;
+
+// function to generate computer choice
 function getComputerChoice() {
-    return Math.floor(Math.random() * items.length);
+    return items[Math.floor(Math.random() * items.length)];
 }
 
-// This is where I got confused last time.
-// We need to break up the game more.
-// There is a few sections. / player choice / round+ / game / results
+// get player choice
+function getPlayerChoice() {
+    return prompt('It\'s time to play rock, paper, scissors! Please type your selection below:');
+}
 
-// some declarations
+// function for if player wins
+function ifPlayerWins(winner, loser) {
+    console.log('You win!', winner + ' beats', loser + ". Go again.");
+    playerWinsCounter++;
+}
 
-// console.log(playerChoice);
-let computerChoice = items[getComputerChoice()];
-console.log(computerChoice);
+// function for if player loses
+function ifPlayerLoses(winner, loser) {
+    console.log('You lose!', winner + ' beats', loser + ". Go again.");
+    playerLosesCounter++;
+}
 
+// just in case, but this should never be relevant
+function somethingBroke() {
+    console.log('I don\'t know how you got here, but I suggest you go back.');
+}
 
-// round
-function playOneRound() {
-    const playerChoice = prompt('Let\'s play rock paper scissors! Best of 5. Type your choice below:');
-    // there's different outcomes: tie+, win+, lose+, invalid+
-    // there's also a lot of different ways to win or lose ...this is the 'fun' part.
-    //here's tie
-    if (playerChoice.toLowerCase() == computerChoice) {
-        return `Tie. You and computer both chose ${computerChoice}.`;
+// this function is the game (not including the loop)
+function playGame () {
+
+    // define choices
+    let pc = getPlayerChoice().toLowerCase();
+    let cc = getComputerChoice().toLowerCase();
+
+    // tie
+    if (pc == cc) {
+        return console.log('You tie! You both chose', pc + '. Go again.');
+    } 
     
-    // here's win
-    } else if ((playerChoice.toLowerCase()=='rock' && computerChoice=='scissors') ||
-               (playerChoice.toLowerCase()=='paper' && computerChoice=='rock') ||
-               (playerChoice.toLowerCase()=='scissors' && computerChoice=='paper')) {
-        return `Win! You chose ${playerChoice}, which beats computer\'s ${computerChoice}.`;
+    // rock
+    else if (pc == 'rock') {
+        if (cc == 'paper') {
+            ifPlayerLoses(cc, pc);
+        } else if (cc == 'scissors') {
+            ifPlayerWins(pc, cc);
+        } else {
+            return somethingBroke();
+        }
+    }
 
-    // here`s lose
-    } else if ((playerChoice.toLowerCase()==`rock` && computerChoice==`paper`) ||
-               (playerChoice.toLowerCase()==`paper` && computerChoice==`scissors`) ||
-               (playerChoice.toLowerCase()==`scissors` && computerChoice==`rock`)) {
-        return `Lose. Computer chose ${computerChoice}, which beats your ${playerChoice}.`;
-
-    // here`s invalid
-    } else if ((playerChoice.toLowerCase()!=`rock`) ||
-               (playerChoice.toLowerCase()!=`paper`) ||
-               (playerChoice.toLowerCase()!=`scissors`)) {
-        return 'Um... this is rock, paper, scissors. Please choose one of those words instead.';
+    // paper
+    else if (pc == 'paper') {
+        if (cc == 'scissors') {
+            ifPlayerLoses(cc, pc);
+        } else if (cc == 'rock') {
+            ifPlayerWins(pc, cc);
+        } else {
+            return somethingBroke();
+        }
+    }    
     
-// simplify at least the 'invalid' portion to this:
-// } else if ((playerChoice.toLowerCase() not in items))
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+    // scissors
+    else if (pc == 'scissors') {
+        if (cc == 'rock') {
+            ifPlayerLoses(cc, pc);
+        } else if (cc == 'paper') {
+            ifPlayerWins(pc, cc);
+        } else {
+            return somethingBroke();
+        }
+    }
 
-    // and just in case
-    } else {
-        return 'How did you get here?! Go back, quick, before they find you here! Run!';
-        // hehe
+    // didn't type rps
+    else if (pc != 'rock' &&
+             pc != 'paper' &&
+             pc != 'scissors') {
+                return console.log('//.// I don\'t like your selection :(');
+             }
+
+    // just in case
+    else {
+        return somethingBroke();
     }
 }
 
-// function playFullGame(playOneRound) {
-   //  define your variables
+
+// here's the game in action
+for (i = 0; ; i++) {
+    if (playerWinsCounter == 3) {
+        console.log('You won the game! Congratulations!');
+        break;
+    }
+    else if (playerLosesCounter == 3) {
+        console.log('You lost the game! Boooo you loser!');
+        break;
+    }
+    playGame();
+}
 
 
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// simplify at least the 'invalid' portion to this later, when code is working:
+// } else if ((playerChoice.toLowerCase() not in items))
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+
+
+// first class functions
