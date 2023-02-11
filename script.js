@@ -56,7 +56,7 @@ function play() {
       somethingBroke();
       return;
     }
-  }
+}
 
   else if (pc == "paper") {
     if (cc == "scissors") {
